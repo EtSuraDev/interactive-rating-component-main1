@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Frontend Mentor | Interactive rating component</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="star">
+            <img src="images/icon-star.svg" alt="">
+        </div>
+        <div class="text-content">
+            <h1>
+                How did we do?
+            </h1>
+            <p>
+                Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!
+            </p>
+        </div>
+        <div class="rateing">
+            <button class="rateing-btn">1</button>
+            <button class="rateing-btn">2</button>
+            <button class="rateing-btn">3</button>
+            <button class="rateing-btn">4</button>
+            <button class="rateing-btn">5</button>
+        </div>
+        <div class=" submit-button ">
+            <button>SUBMIT</button>
+        </div>
+    </div>
+    <div class="attribution ">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge " target="_blank ">Frontend Mentor</a>. Coded by <a href="https://github.com/EtSuraDev ">surafel meles</a>.
+    </div>
+    <script>
+        const container = document.querySelector(".container");
+        const btnRateingParent = document.querySelector(".rateing")
+        const btnRateing = document.querySelectorAll(".rateing-btn");
+
+        function btnRateingClick() {
+            let rateingValue = 0;
+            for (let i = 0; i < btnRateing.length; i++) {
+                btnRateing[i].addEventListener("click", () => {
+                    btnRateing[i].style.color = "black"
+                    btnRateing[i].style.backgroundColor = "white"
+                    rateingValue = i + 1;
+                    console.log(rateingValue)
+                    submitBtnclick(rateingValue)
+                })
+            }
+        }
+        btnRateingClick()
+
+        function submitBtnclick(num) {
+            const submitBtn = document.querySelector(" .submit-button>button ")
+            submitBtn.addEventListener("click", () => {
+
+                const img = document.querySelector(".star>img");
+                img.removeAttribute("src")
+                img.setAttribute("src", "images\\illustration-thank-you.svg")
+                img.parentElement.style.width = "fit-content"
+                img.parentElement.style.height = "fit-content"
+                img.parentElement.style.backgroundColor = "transparent"
+
+                img.style.width = "150px"
+                container.children[1].innerHTML =
+                    `
+                    <div class="num">
+                        <p>You Selected ${num} Out Of 5</p>
+                    </div>
+                    `
+                container.children[2].innerHTML =
+                    `
+                    <div class="new-text-content">
+                        <h1>Thank you!</h1>
+                        <p>
+                            We appreciate you taking the time to give a rating. if you ever need more support, don't hesitate to get in touch
+                        </p>
+                    </div>
+                    `
+                container.style.display = "flex"
+                container.style.flexDirection = "column"
+                container.style.alignItems = "center"
+                container.children[3].remove()
+            })
+        }
+        console.log(container.children[2])
+    </script>
+</body>
+
+</html>
